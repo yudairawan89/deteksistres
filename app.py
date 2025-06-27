@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 
 # ================================
 # Konfigurasi halaman Streamlit
@@ -33,17 +31,11 @@ color_mapping = {
 }
 
 # ================================
-# Fungsi ambil data dari Google Sheet
+# Fungsi ambil data dari Google Sheet CSV
 # ================================
 def load_latest_data_from_sheets():
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
-    client = gspread.authorize(creds)
-
-    sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1Sc961SwCUZ3TExI04YhSRELJSL8nQsQ4VAfsLtV8WSQ")
-    worksheet = sheet.sheet1
-    data = worksheet.get_all_records()
-    df = pd.DataFrame(data)
+    sheet_csv_url = "https://docs.google.com/spreadsheets/d/1Sc961SwCUZ3TExI04YhSRELJSL8nQsQ4VAfsLtV8WSQ/export?format=csv"
+    df = pd.read_csv(sheet_csv_url)
     return df.iloc[-1]
 
 # ================================
