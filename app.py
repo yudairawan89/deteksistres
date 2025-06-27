@@ -9,7 +9,7 @@ import joblib
 st.set_page_config(page_title="Deteksi Tingkat Stres", layout="centered")
 st.markdown("""
     <h1 style='text-align: center; color: #e74c3c;'>🧠 Sistem Deteksi Tingkat Stres Mahasiswa</h1>
-    <p style='text-align: center;'>Deteksi Realtime dari Data Google Sheets</p>
+    <p style='text-align: center;'>Deteksi Realtime dari Data IoT</p>
     <hr>
 """, unsafe_allow_html=True)
 
@@ -52,8 +52,8 @@ def prediksi_stres(input_data):
 # ================================
 # Deteksi Realtime dari Google Sheet
 # ================================
-st.subheader("🔄 Deteksi Stres Realtime dari Google Sheets")
-if st.button("Deteksi Stres (Realtime)"):
+st.subheader("🔄 Deteksi Stres Realtime dari IoT")
+if st.button("Deteksi Stres"):
     try:
         latest = load_latest_data_from_sheets()
         input_data = [
@@ -66,7 +66,7 @@ if st.button("Deteksi Stres (Realtime)"):
         # ===== Tampilan Data Fisiologis Realtime =====
         st.markdown(f"""
             <div style="background-color:#f4f4f4; padding:20px; border-radius:10px; margin-bottom:20px;">
-                <h4 style='color:#333;'>📋 Data Fisiologis Terakhir</h4>
+                <h4 style='color:#333;'>📋 Data Fisiologis</h4>
                 <p><b>Suhu Tubuh:</b> {input_data[0]} °C</p>
                 <p><b>Oksigen dalam Darah (SpO2):</b> {input_data[1]} %</p>
                 <p><b>Detak Jantung:</b> {input_data[2]} BPM</p>
